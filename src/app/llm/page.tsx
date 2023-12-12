@@ -11,9 +11,6 @@ import { Header } from '@/src/homepage/Header';
 
 export default function Page() {
     return <>
-        <Header title="LLM Visualization">
-            <InfoButton />
-        </Header>
         <LayerView />
         <div id="portal-container"></div>
     </>;
