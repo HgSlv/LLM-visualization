@@ -58,10 +58,10 @@ export function walkthroughIntro(args: IWalkthroughArgs) {
 
     setInitialCamera(state, new Vec3(184.744, 0.000, -636.820), new Vec3(296.000, 16.000, 13.500));
 
-    let c0 = commentary(wt, null, 0)`Welcome to the walkthrough of the GPT large language model! Here we'll explore the model _nano-gpt_, with a mere 85,000 parameters.
+    let c0 = commentary(wt, null, 0)`Welcome to the walkthrough of the GPT large language model! We'll focus on a small version called nano-gpt with 85 000 instructions. Compared with GPT-3 175B it may be small — but don't be fooled; it's pretty clever!
 
-Its goal is a simple one: take a sequence of six letters: ${embed(ExampleInputOutput)}
-and sort them in alphabetical order, i.e. to "ABBBCC".`;
+    Here's what we'll ask him to do: Take a short list of just six letters like this: ${embed(ExampleInputOutput)}
+and sort them in alphabetical order, i.e. "ABBBCC".`;
 
     if (c0.t > 0) {
         for (let cube of layout.cubes) {
@@ -96,9 +96,9 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
     let tokenStr = c_str('_token_', 0, DimStyle.Token);
     let tokenIdxStr = c_str('_token index_', 0, DimStyle.TokenIdx);
 
-    commentary(wt, t6)`We call each of these letters a ${tokenStr}, and the set of the model's different tokens make up its _vocabulary_:${embed(TokenVocab)}
+    commentary(wt, t6)`Each letter is given a special name - a ${tokenStr}, the complete list of tokens it knows is its: _vocabulary_:${embed(TokenVocab)}
 
-    From this table, each token is assigned a number, its ${tokenIdxStr}. And now we can enter this sequence of numbers into the model:${embed(ExampleTokenValues)}\n`;
+    Here we can see a table that turns every letter into a number. That number is called a ${tokenIdxStr}. Now, with a bunch of letters to sort, we turn them into these numbers, just like this:${embed(ExampleTokenValues)}\n`;
     breakAfter();
 
     let t7 = afterTime(null, 1.5, 0.5);
@@ -129,8 +129,11 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
 
     breakAfter();
 
-    let c5 = commentary(wt)`In the 3d view, each green cell represents a number being processed, and each blue cell is a weight. ${embed(GreenBlueCells)}
-    Each number in the sequence first gets turned into a 48 element vector (a size chosen for this particular model). This is called an _embedding_.`;
+    let c5 = commentary(wt)`In the 3d view, each cell in our view is part of the machine's thinking process:
+    - Green cells show numbers that are being worked on.
+    - Blue cells represent something called a weight, which helps the machine decide how important each number is.
+    ${embed(GreenBlueCells)}
+    Every piece of data, like a letter or a word, gets transformed into a small list of 48 numbers. This list is what we call an _embedding_. It's like giving each word a special code that the model knows how to read and understand.`;
     breakAfter(c5);
 
     {
@@ -166,7 +169,9 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
     }
 
     breakAfter();
-    commentary(wt)`The embedding is then passed through the model, going through a series of layers, called transformers, before reaching the bottom.`;
+    commentary(wt)`This embedding is like a customer going through a store. They start at the entrance, and then go through sections collecting  information about our product - in our these sections are called _transformers_.
+
+    After the last section, our customer should have a complete understanding of the input we gave him.`;
     breakAfter();
 
     {
@@ -220,8 +225,7 @@ and sort them in alphabetical order, i.e. to "ABBBCC".`;
         }
     }
 
-    commentary(wt)`So what's the output? A prediction of the next token in the sequence. So at the 6th entry, we get probabilities that the next token is
-        going to be 'A', 'B', or 'C'.`
+    commentary(wt)`So what's the output? It's the prediction of what the next token will be after the ones it has seen. So at the 6th entry, we get probabilities that the next token is going to be 'A', 'B', or 'C'.`
 
     commentary(wt)`In this case, the model is pretty sure it's going to be 'A'. Now, we can feed this prediction back into the top of the model, and repeat
     the entire process.`;
