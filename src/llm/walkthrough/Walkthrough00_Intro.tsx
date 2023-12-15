@@ -58,7 +58,7 @@ export function walkthroughIntro(args: IWalkthroughArgs) {
 
     setInitialCamera(state, new Vec3(184.744, 0.000, -636.820), new Vec3(296.000, 16.000, 13.500));
 
-    let c0 = commentary(wt, null, 0)`Welcome to the walkthrough of the GPT large language model! We'll focus on a small version called nano-gpt with 85 000 instructions. Compared with GPT-3 175B it may be small — but don't be fooled; it's pretty clever!
+    let c0 = commentary(wt, null, 0)`Welcome to the walkthrough of the GPT large language model! We'll focus on already trained small version called nano-gpt with 85 000 instructions. Compared with GPT-3 175B it may be small — but it's pretty clever!
 
     Here's what we'll ask him to do: Take a short list of just six letters like this: ${embed(ExampleInputOutput)}
 and sort them in alphabetical order, i.e. "ABBBCC".`;
@@ -129,11 +129,14 @@ and sort them in alphabetical order, i.e. "ABBBCC".`;
 
     breakAfter();
 
-    let c5 = commentary(wt)`In the 3d view, each cell in our view is part of the machine's thinking process:
+    let c5 = commentary(wt)`
+    These tokens are transformed into a list of 48 numbers that represent words. This list is what we call an _embedding_.
+
+    In the 3d view, each cell in our view is part of the machine's thinking process:
     - Green cells show numbers that are being worked on.
     - Blue cells represent something called a weight, which helps the machine decide how important each number is.
     ${embed(GreenBlueCells)}
-    Every piece of data, like a letter or a word, gets transformed into a small list of 48 numbers. This list is what we call an _embedding_. It's like giving each word a special code that the model knows how to read and understand.`;
+`;
     breakAfter(c5);
 
     {
@@ -169,7 +172,7 @@ and sort them in alphabetical order, i.e. "ABBBCC".`;
     }
 
     breakAfter();
-    commentary(wt)`This embedding is like a customer going through a store. They start at the entrance, and then go through sections collecting  information about our product - in our these sections are called _transformers_.
+    commentary(wt)`Now think about a customer going through a shop. They start at the entrance, and then go through sections collecting  information about a product - in our example these sections are called _transformers_.
 
     After the last section, our customer should have a complete understanding of the input we gave him.`;
     breakAfter();
